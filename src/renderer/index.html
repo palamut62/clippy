@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLIPPY</title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <div id="app">
+    <header class="titlebar app-header">
+      <div class="brand-pill">CLIPPY</div>
+
+      <div class="header-actions">
+        <div class="header-meta">
+          <div class="shortcut-pills" aria-label="Toggle shortcut">
+            <span class="shortcut-key">Ctrl</span>
+            <span class="shortcut-key">Shift</span>
+            <span class="shortcut-key">V</span>
+            <span class="shortcut-text">to toggle</span>
+          </div>
+          <button class="header-pill" id="btnCompact" type="button">Compact</button>
+          <button class="header-pill header-pill-danger" id="btnClear" type="button">Clear</button>
+          <button class="ghost-icon-btn" id="btnSettings" title="Open settings" aria-label="Open settings">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 8.75a3.25 3.25 0 1 0 0 6.5a3.25 3.25 0 0 0 0-6.5Z" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M19.14 12.94a7.97 7.97 0 0 0 .05-.94c0-.32-.02-.63-.05-.94l2.02-1.57a.5.5 0 0 0 .12-.64l-1.91-3.3a.5.5 0 0 0-.6-.22l-2.39.96a7.43 7.43 0 0 0-1.63-.95l-.36-2.54a.49.49 0 0 0-.49-.42h-3.82a.49.49 0 0 0-.49.42l-.36 2.54c-.58.23-1.13.54-1.63.95l-2.39-.96a.5.5 0 0 0-.6.22l-1.91 3.3a.5.5 0 0 0 .12.64l2.02 1.57c-.03.31-.05.62-.05.94c0 .32.02.63.05.94l-2.02 1.57a.5.5 0 0 0-.12.64l1.91 3.3c.13.22.39.31.6.22l2.39-.96c.5.4 1.05.72 1.63.95l.36 2.54c.04.24.25.42.49.42h3.82c.24 0 .45-.18.49-.42l.36-2.54c.58-.23 1.13-.55 1.63-.95l2.39.96c.22.09.47 0 .6-.22l1.91-3.3a.5.5 0 0 0-.12-.64l-2.02-1.57Z" stroke="currentColor" stroke-width="1.2"/>
+            </svg>
+          </button>
+        </div>
+        <div class="window-controls" aria-label="Window controls">
+          <button class="window-control-btn" id="btnMinimize" title="Minimize" aria-label="Minimize">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M3 7.5H11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <button class="window-control-btn window-control-btn-close" id="btnClose" title="Close" aria-label="Close">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M4 4L10 10M10 4L4 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <section class="top-controls">
+      <label class="search-shell" for="searchInput">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/>
+        </svg>
+        <input type="text" id="searchInput" placeholder="Search in history..." autocomplete="off" spellcheck="false">
+      </label>
+
+      <div class="filter-chips" role="tablist" aria-label="Clipboard filters">
+        <button class="filter-chip active" type="button" data-filter="all">All</button>
+        <button class="filter-chip" type="button" data-filter="text">Text</button>
+        <button class="filter-chip" type="button" data-filter="image">Images</button>
+        <button class="filter-chip" type="button" data-filter="snippet">Snippets</button>
+      </div>
+    </section>
+
+    <main class="workspace">
+      <section class="history-column" aria-label="Clipboard history">
+        <div class="history-list" id="historyList"></div>
+      </section>
+
+      <section class="detail-column" aria-label="Selected clipboard item details">
+        <div class="detail-empty" id="detailEmpty">
+          <div class="detail-empty-orb"></div>
+          <h2>Select a clipboard item</h2>
+          <p>Preview full content and manage it from here.</p>
+        </div>
+
+        <div class="detail-view is-hidden" id="detailView">
+          <div class="detail-topline">
+            <h2 class="detail-quote" id="detailTitle">"Clipboard item"</h2>
+            <span class="detail-type-text" id="detailType">TEXT</span>
+          </div>
+
+          <div class="preview-frame">
+            <div class="preview-box" id="previewBox"></div>
+          </div>
+
+          <div class="tag-row">
+            <input
+              type="text"
+              id="tagInput"
+              class="tag-input"
+              placeholder="Tags (comma separated, e.g. code, link, note)..."
+              autocomplete="off"
+              spellcheck="false"
+            >
+          </div>
+
+          <div class="detail-meta">
+            <span class="timestamp" id="detailTimestamp"></span>
+            <span class="pin-inline is-hidden" id="detailPinned">Pinned</span>
+          </div>
+
+          <div class="tag-list visually-muted" id="tagList"></div>
+
+          <div class="actions-grid">
+            <button type="button" class="action-btn" id="btnPinAction">Pin / Unpin</button>
+            <button type="button" class="action-btn" id="btnCopyAction">Copy</button>
+            <button type="button" class="action-btn" id="btnPlainTextAction">Plain text</button>
+            <button type="button" class="action-btn" id="btnSnippetAction">Add to snippets</button>
+            <button type="button" class="action-btn action-btn-danger" id="btnDeleteAction">Delete</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="status-bar">
+      <div class="status-indicator">
+        <span class="status-dot" id="trackingIndicator"></span>
+        <span id="statusText">Live clipboard tracking</span>
+      </div>
+      <div class="status-shortcuts">
+        <span>Press</span>
+        <span class="shortcut-key footer-key">&#9166;</span>
+        <span>to paste selected</span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

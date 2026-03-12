@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLIPPY - Ayarlar</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/settings.css">
+</head>
+<body>
+  <div id="settings-app">
+    <header class="settings-header">
+      <div class="settings-header-copy">
+        <span class="settings-kicker">CLIPPY</span>
+        <h1 class="settings-title">Ayarlar</h1>
+        <p class="settings-subtitle">Tema, geçmiş limiti ve başlangıç davranışını yönet.</p>
+      </div>
+
+      <button class="settings-close-btn" id="btnClose" title="Kapat" aria-label="Kapat">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M7 7l10 10M17 7L7 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </header>
+
+    <div class="settings-content">
+      <section class="settings-card">
+        <div class="setting-head">
+          <div>
+            <h2 class="setting-title">Tema</h2>
+            <p class="setting-description">Arayüz için tercih ettiğin görünümü seç.</p>
+          </div>
+        </div>
+        <div class="theme-selector">
+          <button class="theme-btn active" data-theme="dark" type="button">
+            <span class="theme-preview dark-preview"></span>
+            <span>Koyu</span>
+          </button>
+          <button class="theme-btn" data-theme="light" type="button">
+            <span class="theme-preview light-preview"></span>
+            <span>Açık</span>
+          </button>
+          <button class="theme-btn" data-theme="purple" type="button">
+            <span class="theme-preview purple-preview"></span>
+            <span>Mor</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="settings-card">
+        <div class="setting-row">
+          <div>
+            <h2 class="setting-title">Geçmiş limiti</h2>
+            <p class="setting-description">Panoda tutulacak maksimum öğe sayısı.</p>
+          </div>
+          <div class="setting-control">
+            <select id="maxHistory">
+              <option value="20">20 kayıt</option>
+              <option value="50">50 kayıt</option>
+              <option value="100">100 kayıt</option>
+              <option value="200">200 kayıt</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <h2 class="setting-title">Kısayol</h2>
+            <p class="setting-description">Uygulamayı açmak için kullanılan kombinasyon.</p>
+          </div>
+          <div class="shortcut-display" id="shortcutDisplay">Ctrl+Shift+V</div>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <h2 class="setting-title">Windows ile başlat</h2>
+            <p class="setting-description">Oturum açıldığında CLIPPY arka planda çalışsın.</p>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="launchAtStartup" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </section>
+
+      <section class="settings-card settings-info-card">
+        <div class="info-row">
+          <span>CLIPPY</span>
+          <span>v1.0.0</span>
+        </div>
+        <div class="info-row muted">
+          Hafif ve hızlı clipboard yöneticisi
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="settings.js"></script>
+</body>
+</html>
