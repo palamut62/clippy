@@ -311,7 +311,7 @@ function searchHistory(query) {
 function trimHistory() {
   const pinned = clipboardHistory.filter((item) => item.pinned);
   const unpinned = clipboardHistory.filter((item) => !item.pinned);
-  clipboardHistory = [...pinned, ...unpinned].slice(0, getMaxHistory());
+  clipboardHistory = [...pinned, ...unpinned.slice(0, getMaxHistory())];
 }
 
 function addToHistory(item) {
