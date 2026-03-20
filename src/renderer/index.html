@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,12 +17,24 @@
             <span class="shortcut-key">Ctrl</span>
             <span class="shortcut-key">Shift</span>
             <span class="shortcut-key">V</span>
-            <span class="shortcut-text">to toggle</span>
+            <span class="shortcut-text" id="shortcutText">to toggle</span>
           </div>
+          <button class="header-pill icon-pill" id="btnThemeToggle" type="button" title="Toggle theme">
+            <svg id="themeIconSun" width="15" height="15" viewBox="0 0 24 24" fill="none" style="display:none">
+              <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M12 2v2m0 16v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M2 12h2m16 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            <svg id="themeIconMoon" width="15" height="15" viewBox="0 0 24 24" fill="none">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="header-pill icon-pill" id="btnLangToggle" type="button" title="Language">
+            <span id="langLabel" style="font-size:11px;font-weight:700;letter-spacing:0.05em">TR</span>
+          </button>
           <button class="header-pill" id="btnCompact" type="button">Compact</button>
           <button class="header-pill header-pill-danger" id="btnClear" type="button">Clear</button>
-          <button class="ghost-icon-btn" id="btnSettings" title="Open settings" aria-label="Open settings">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <button class="ghost-icon-btn" id="btnSettings" title="Settings" aria-label="Settings">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M12 8.75a3.25 3.25 0 1 0 0 6.5a3.25 3.25 0 0 0 0-6.5Z" stroke="currentColor" stroke-width="1.6"/>
               <path d="M19.14 12.94a7.97 7.97 0 0 0 .05-.94c0-.32-.02-.63-.05-.94l2.02-1.57a.5.5 0 0 0 .12-.64l-1.91-3.3a.5.5 0 0 0-.6-.22l-2.39.96a7.43 7.43 0 0 0-1.63-.95l-.36-2.54a.49.49 0 0 0-.49-.42h-3.82a.49.49 0 0 0-.49.42l-.36 2.54c-.58.23-1.13.54-1.63.95l-2.39-.96a.5.5 0 0 0-.6.22l-1.91 3.3a.5.5 0 0 0 .12.64l2.02 1.57c-.03.31-.05.62-.05.94c0 .32.02.63.05.94l-2.02 1.57a.5.5 0 0 0-.12.64l1.91 3.3c.13.22.39.31.6.22l2.39-.96c.5.4 1.05.72 1.63.95l.36 2.54c.04.24.25.42.49.42h3.82c.24 0 .45-.18.49-.42l.36-2.54c.58-.23 1.13-.55 1.63-.95l2.39.96c.22.09.47 0 .6-.22l1.91-3.3a.5.5 0 0 0-.12-.64l-2.02-1.57Z" stroke="currentColor" stroke-width="1.2"/>
             </svg>
@@ -45,7 +57,7 @@
 
     <section class="top-controls">
       <label class="search-shell" for="searchInput">
-        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
           <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/>
         </svg>
@@ -68,8 +80,8 @@
       <section class="detail-column" aria-label="Selected clipboard item details">
         <div class="detail-empty" id="detailEmpty">
           <div class="detail-empty-orb"></div>
-          <h2>Select a clipboard item</h2>
-          <p>Preview full content and manage it from here.</p>
+          <h2 id="emptyTitle">Select a clipboard item</h2>
+          <p id="emptyDesc">Preview full content and manage it from here.</p>
         </div>
 
         <div class="detail-view is-hidden" id="detailView">
@@ -83,14 +95,7 @@
           </div>
 
           <div class="tag-row">
-            <input
-              type="text"
-              id="tagInput"
-              class="tag-input"
-              placeholder="Tags (comma separated, e.g. code, link, note)..."
-              autocomplete="off"
-              spellcheck="false"
-            >
+            <input type="text" id="tagInput" class="tag-input" placeholder="Tags (comma separated)..." autocomplete="off" spellcheck="false">
           </div>
 
           <div class="detail-meta">
@@ -117,13 +122,14 @@
         <span id="statusText">Live clipboard tracking</span>
       </div>
       <div class="status-shortcuts">
-        <span>Press</span>
+        <span id="pressLabel">Press</span>
         <span class="shortcut-key footer-key">&#9166;</span>
-        <span>to paste selected</span>
+        <span id="pasteLabel">to paste selected</span>
       </div>
     </footer>
   </div>
 
+  <script src="i18n.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

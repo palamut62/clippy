@@ -37,7 +37,7 @@ function loadSettings() {
   const defaults = {
     maxHistory: 50,
     theme: 'dark',
-    language: 'en',
+    language: 'tr',
     launchAtStartup: true,
     shortcut: 'CommandOrControl+Shift+V',
     pollInterval: 800,
@@ -646,8 +646,10 @@ ipcMain.handle('copy-item', (_, itemFromRenderer) => {
     if (item.type === 'text') {
       clipboard.writeText(item.text);
     } else if (item.type === 'html') {
-      clipboard.writeHTML(item.html || '');
-      clipboard.writeText(item.textPreview || '');
+      clipboard.write({
+        html: item.html || '',
+        text: item.textPreview || ''
+      });
     } else if (item.type === 'image') {
       const image = getNativeImageFromHistoryItem(item);
 
